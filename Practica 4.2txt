@@ -1,0 +1,97 @@
+Comandos utilizados, práctica laboratorio 4.2: Administración de Servicios de Red.
+
+INSTALAR UN SERVIDOR DE CORREOS
+
+============================================
+
+# Instalar el servidor de correo Postfix
+
+sudo dnf install postfix* -y
+sudo dnf install mail* -y
+
+# Ir al directorio de Postfix
+
+cd /etc/postfix/
+
+#Dirigirse a todas las configuraciones de Postfix
+
+sudo vi main.cf
+
+#Agregamos hostname
+
+myhostname = thaziel.ro.com
+
+#Agregamos un dominio
+
+mydomain = thaziel.rod.com
+
+#Descomentamos la segunda línea de myorigin
+
+myorigin = $mydomain
+
+#Agregamos nuestra dirección IP descomentando la primera línea de mynetworks
+
+mynetworks = 192.168.70.128/24, 127.0.0.0/8
+
+#Agregamos un relayhost
+
+relayhost = [smtp.gmail.com]:587
+
+#Vamos al final y ponemos la configuración
+
+######################
+smtp_use_tls = yes
+smtp_sasl_auth_enable = yes
+smtp_tls_security_level = encrypt
+
+smtp_sasl_security_options =
+
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+
+#Comentamos la línea de smpt may
+
+#smtp_tls_security_level = may
+
+#Agregamos la credenciales de autenticación
+
+sudo vi sasl_passwd
+
+#Dentro de la misma ponemos las credenciales
+
+[smtp.gmail.com]:587 thazielbrearamirez42@gmail.com:xjzd kwfj xkfw pwuo
+
+#Agregarle permisos
+
+sudo postmap sasl_passwd
+
+#Poner escritura y lectura solo para root
+
+sudo chmod 600 sasl_passwd
+
+#Inicializamos el sistema de Postfix
+
+sudo systemctl start postfix
+
+#Verificamos el estatus
+
+sudo systemctl status postfix
+
+#Creamos el contenido del correo que vamos a enviar
+
+sudo vi mensaje.txt
+
+#Contenido
+
+Estudiante: Thaziel Brea Ramirez 
+Matricula: 2025-2192
+
+Laboratorio 4.
+
+#Enviamos un correo de prueba
+
+mail -s "Prueba" thazielbrearamirez42@gmail.com < mensaje.txt
+
+#Lo enviamos al maestro
+mail -s "MambruSeFueALaGuerra" os3conadrian@gmail.com < mensaje.txt
+
+mail -s "MambruSeFueALaGuerra" os3conadrian@gmail.com < mensaje.txt
