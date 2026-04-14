@@ -31,7 +31,7 @@ myorigin = $mydomain
 
 #Agregamos nuestra dirección IP descomentando la primera línea de mynetworks
 
-mynetworks = 192.168.70.128/24, 127.0.0.0/8
+mynetworks = 192.168.1,133/24, 127.0.0.0/8
 
 #Agregamos un relayhost
 
@@ -58,7 +58,7 @@ sudo vi sasl_passwd
 
 #Dentro de la misma ponemos las credenciales
 
-[smtp.gmail.com]:587 thazielbrearamirez42@gmail.com:xjzd kwfj xkfw pwuo
+[smtp.gmail.com]:587 thazielbrearamirez42@gmail.com:krsl mbiq tqzn dvsc   (se busca en cont. de aplicaiones de google)
 
 #Agregarle permisos
 
@@ -95,3 +95,13 @@ mail -s "Prueba" thazielbrearamirez42@gmail.com < mensaje.txt
 mail -s "MambruSeFueALaGuerra" os3conadrian@gmail.com < mensaje.txt
 
 mail -s "MambruSeFueALaGuerra" os3conadrian@gmail.com < mensaje.txt
+
+
+
+O más simple, recrea el archivo directamente:
+bashcat > ~/mensaje.txt << EOF
+Estudiante: Thaziel Brea Ramirez
+Matricula: 2025-2192
+Laboratorio 4.
+EOF
+
