@@ -32,7 +32,7 @@ sudo nano /etc/cups/cupsd.conf
 
 # Dentro del archivo, en 'Listen localhost:631' agregamos 'Port 631' para que escuche en todas las interfaces.
 
-# Luego agregamos 'Allow from 192.168.70.128' (IP del cliente Windows) en las siguientes secciones: <Location />, <Location /admin>, <Location /admin/conf>, <Location /printers>.
+# Luego agregamos 'Allow from  192.168.1.50' (IP del cliente Windows) en las siguientes secciones: <Location />, <Location /admin>, <Location /admin/conf>, <Location /printers>.
 
 # Guardamos con Ctrl+O y salimos con Ctrl+X.
 
@@ -44,13 +44,15 @@ sudo systemctl restart cups
 
 sudo cupsctl --remote-admin --remote-any --share-printers
 
-# Desde el navegador en la PC con Windows (192.168.70.128), accedemos a: http://192.168.70.128:631
+#Desde vm accedemos a hhtp//192.168.1.133:631
+
+# Desde el navegador en la PC con Windows accedemos a: http://192.168.70.128:631
 
 # Vamos a Administration > Add Printer, seleccionamos la impresora PDF, le asignamos un nombre, marcamos "Share this printer", elegimos la marca Generic y el modelo "Generic CUPS-PDF Printer", luego hacemos clic en "Add Printer".
 
 # Copiamos la URL generada (por ejemplo, http://192.168.70.128:631/printers/Thaziel).
 
-# En Windows vamos a Settings > Devices > Printers & scanners > Add printer > The printer I want isn’t listed > Select a shared printer by name, y pegamos la URL (quitando la "s" de https si la tiene).
+# En Windows vamos a Settings > Disp.> Printers & scanners > Add printer > The printer I want isn’t listed > Select a shared printer by name, y pegamos la URL (quitando la "s" de https si la tiene).
 
 # Finalizamos la instalación y procedemos a imprimir un documento: Abrimos Word, escribimos un texto, presionamos Ctrl+P, elegimos la impresora creada, y hacemos clic en Print.
 
